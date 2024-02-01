@@ -40,7 +40,8 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build
+        # run: npm run build
+        run: exit 1
 
       - name: Deploy to GitHub Pages
         run: |
@@ -56,6 +57,9 @@ jobs:
       - name: Job Succeed
         if: ${{ success() }}
         run: curl -s -d "Portfolio Build and Deploy Success." -H "Title:Portfolio Workflow" -H "Priority:high" https://ntfy.polarserver1.cloud/dev
+      - name: Job Failed
+        if: ${{ failure() }}
+        run: curl -s -d "Portfolio Build and Deploy Failed." -H "Title:Portfolio Workflow" -H "Priority:high" https://ntfy.polarserver1.cloud/dev
   # notify:
   #   needs: build
   #   runs-on: ubuntu-latest
