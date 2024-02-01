@@ -56,9 +56,13 @@ jobs:
       - name: Job Succeed
         if: ${{ success() }}
         run: curl -s -d "Portfolio Build and Deploy Success." -H "Title:Portfolio Workflow" -H "Priority:high" $NTFY_SERVER
+        env:
+          NTFY_SERVER: ${{ vars.NTFY_SERVER }}
       - name: Job Failed
         if: ${{ failure() }}
         run: curl -s -d "Portfolio Build and Deploy Failed." -H "Title:Portfolio Workflow" -H "Priority:high" $NTFY_SERVER
+        env:
+          NTFY_SERVER: ${{ vars.NTFY_SERVER }}
   # notify:
   #   needs: build
   #   runs-on: ubuntu-latest
