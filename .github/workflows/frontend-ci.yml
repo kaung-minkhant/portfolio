@@ -55,10 +55,10 @@ jobs:
           repository: ${{ github.repository }}
       - name: Job Succeed
         if: ${{ success() }}
-        run: curl -s -d "Portfolio Build and Deploy Success." -H "Title:Portfolio Workflow" -H "Priority:high" https://ntfy.polarserver1.cloud/dev
+        run: curl -s -d "Portfolio Build and Deploy Success." -H "Title:Portfolio Workflow" -H "Priority:high" $NTFY_SERVER
       - name: Job Failed
         if: ${{ failure() }}
-        run: curl -s -d "Portfolio Build and Deploy Failed." -H "Title:Portfolio Workflow" -H "Priority:high" https://ntfy.polarserver1.cloud/dev
+        run: curl -s -d "Portfolio Build and Deploy Failed." -H "Title:Portfolio Workflow" -H "Priority:high" $NTFY_SERVER
   # notify:
   #   needs: build
   #   runs-on: ubuntu-latest
