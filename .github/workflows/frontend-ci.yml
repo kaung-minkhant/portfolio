@@ -55,4 +55,4 @@ jobs:
           repository: ${{ github.repository }}
       
       - name: Notify
-        run: curl -s -d "Portfolio Build and Deploy Success." -H "Title:Portfolio Workflow" -H "Priority:high" https://notify.polarserver1.cloud/dev
+        run: curl -s -d "Portfolio Build and Deploy Success." -H "Title:Portfolio Workflow" -H "Priority:high" https://ntfy.polarserver1.cloud/dev
