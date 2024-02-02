@@ -1,0 +1,143 @@
+## naming: Project-Environment-Resource
+
+Parameters:
+  ProjectName:
+    Type: String
+    Description: 'Project Name'
+  Environment:
+    Type: String
+    Description: 'Environment for this stack'
+    Default: 'Development'
+    AllowedValues:
+      - Development
+      - Production
+
+Mappings:
+  EnvToSuffix:
+    Development:
+      suffix: "development"
+    Production:
+      suffix: "production"
+
+Resources:
+  ## Create a bucket
+  websiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Join [ '-', [ !Ref ProjectName, !FindInMap [EnvToSuffix, !Ref Environment, suffix], "bucket" ]]
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      WebsiteConfiguration:
+        IndexDocument: index.html
+
+
+  ## Bucket Access Policy
+  BucketAccessPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    DependsOn: websiteBucket  
+    Properties:
+      Bucket:
+        Ref: 'websiteBucket'
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource:
+              Fn::Join:
+                - ''
+                - - 'arn:aws:s3:::'
+                  - Ref: 'websiteBucket'
+                  - '/*'
+
+  ## Create a user
+  User:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: !Join [ '-' , [
+          !Ref ProjectName,
+          !FindInMap [EnvToSuffix, !Ref Environment, suffix],
+          !Ref AWS::Region,
+          "user"
+        ]
+      ]
+
+  ## Create Policy
+  Policy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: !Join [ '-', [ !Ref ProjectName, !FindInMap [EnvToSuffix, !Ref Environment, suffix], "user-policy", ] ]
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action: 's3:GetBucketLocation'
+            Resource:
+              - arn:aws:s3:::*
+          - Effect: Allow
+            Action:
+              - s3:PutBucketWebsite
+              - s3:PutObject
+              - s3:PutObjectAcl
+              - s3:GetObject
+              - s3:ListBucket
+              - s3:DeleteObject
+            Resource:
+              - !GetAtt websiteBucket.Arn
+              - !Join [
+                '', [
+                  !GetAtt websiteBucket.Arn,
+                  "/*"
+                ]
+              ]
+      Users: 
+        - !Ref User
+    DependsOn:
+      - User
+      - websiteBucket
+
+  ## Create Access Key
+  UserAccessKey:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      UserName: !Ref User
+    DependsOn: User
+
+  ## Cloudfront Distribution
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig: 
+        Enabled: true
+        DefaultCacheBehavior:
+          ViewerProtocolPolicy: redirect-to-https
+          TargetOriginId: SampleDistribution
+          ForwardedValues:
+            QueryString: true
+        Origins: 
+          - Id: SampleDistribution
+            DomainName: !Join [ '-',  [!Join [ '.', [!Ref websiteBucket, 's3-website']], !Join [ '.', [ !Ref AWS::Region, 'amazonaws.com']] ]]
+            CustomOriginConfig:
+              OriginProtocolPolicy: http-only
+    DependsOn: websiteBucket
+
+
+
+
+Outputs:
+  UserAccessKey:
+    Description: 'Access Key for user'
+    Value: !Ref UserAccessKey
+  UserSecretAccessKey:
+    Description: 'Secret Access Key for user'
+    Value: !GetAtt UserAccessKey.SecretAccessKey
+  WebsiteURL:
+    Description: 'Website URL for Website'
+    Value: !GetAtt websiteBucket.WebsiteURL
+  CloudFrontWebsiteURL:
+    Description: 'Cloudfront URL for Website'
+    Value: !GetAtt CloudFrontDistribution.DomainName
