@@ -23,6 +23,7 @@ Resources:
   ## Create a bucket
   websiteBucket:
     Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
     Properties:
       BucketName: !Join [ '-', [ !Ref ProjectName, !FindInMap [EnvToSuffix, !Ref Environment, suffix], "bucket" ]]
       PublicAccessBlockConfiguration:
@@ -108,22 +109,22 @@ Resources:
     DependsOn: User
 
   ## Cloudfront Distribution
-  CloudFrontDistribution:
-    Type: AWS::CloudFront::Distribution
-    Properties:
-      DistributionConfig: 
-        Enabled: true
-        DefaultCacheBehavior:
-          ViewerProtocolPolicy: redirect-to-https
-          TargetOriginId: SampleDistribution
-          ForwardedValues:
-            QueryString: true
-        Origins: 
-          - Id: SampleDistribution
-            DomainName: !Join [ '-',  [!Join [ '.', [!Ref websiteBucket, 's3-website']], !Join [ '.', [ !Ref AWS::Region, 'amazonaws.com']] ]]
-            CustomOriginConfig:
-              OriginProtocolPolicy: http-only
-    DependsOn: websiteBucket
+  # CloudFrontDistribution:
+  #   Type: AWS::CloudFront::Distribution
+  #   Properties:
+  #     DistributionConfig: 
+  #       Enabled: true
+  #       DefaultCacheBehavior:
+  #         ViewerProtocolPolicy: redirect-to-https
+  #         TargetOriginId: SampleDistribution
+  #         ForwardedValues:
+  #           QueryString: true
+  #       Origins: 
+  #         - Id: SampleDistribution
+  #           DomainName: !Join [ '-',  [!Join [ '.', [!Ref websiteBucket, 's3-website']], !Join [ '.', [ !Ref AWS::Region, 'amazonaws.com']] ]]
+  #           CustomOriginConfig:
+  #             OriginProtocolPolicy: http-only
+  #   DependsOn: websiteBucket
 
 
 
@@ -138,6 +139,6 @@ Outputs:
   WebsiteURL:
     Description: 'Website URL for Website'
     Value: !GetAtt websiteBucket.WebsiteURL
-  CloudFrontWebsiteURL:
-    Description: 'Cloudfront URL for Website'
-    Value: !GetAtt CloudFrontDistribution.DomainName
+  # CloudFrontWebsiteURL:
+  #   Description: 'Cloudfront URL for Website'
+  #   Value: !GetAtt CloudFrontDistribution.DomainName
