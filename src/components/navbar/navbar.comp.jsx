@@ -34,7 +34,7 @@ export const NavBarComponent = () => {
         </NavItems>
       </Nav>
       {
-        isMobile && (
+        isMobile && isNavOpened && (
           <NavOverlay onClick={() => isNavOpened && toggleNavbar()}></NavOverlay>
         )
       }

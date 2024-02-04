@@ -42,7 +42,8 @@ export const NavItems = styled.div`
 export const NavOverlay = styled.div`
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  top: 10vh;
+  height: 90vh;
   z-index: 5;
   /* background-color: blue; */
 `

@@ -7,9 +7,9 @@ export const FooterComponent = () => {
   return (
     <Footer>
       <FooterIcons>
-        <FooterIcon href="https://www.linkedin.com/in/kaung-minkhant/" target="_blank">
+        {/* <FooterIcon href="https://www.linkedin.com/in/kaung-minkhant/" target="_blank">
           <FaInstagram size={"2em"} />
-        </FooterIcon>
+        </FooterIcon> */}
         <FooterIcon href="https://www.linkedin.com/in/kaung-minkhant/" target="_blank">
           <FaLinkedin size={"2em"} />
         </FooterIcon>

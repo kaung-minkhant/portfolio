@@ -1,21 +1,91 @@
-import { useMediaQuery } from "react-responsive"
-import { CVButton, CVPhoto, CVPhotoContainer, Description, InfoWrapper, Introduction, Title } from "./introduction.styles"
-import { screenBreakpoints } from "../../settings/breakpoints"
+import { CVButton, CVPhoto, CVPhotoContainer, Description, InfoWrapper, Introduction, QRContainer, QRImage, Title } from "./introduction.styles"
+import { ButtonGroup } from "../../styles"
+import Modal from 'react-modal'
+import { useEffect, useState } from "react"
+import QRCode from 'qrcode'
+import { introductionContent } from "../../content/introduction"
 
 export const IntroductionComponent = () => {
+
+  const downloadCV = () => {
+    fetch(import.meta.env.VITE_CV_LINK)
+      .then(response => response.blob())
+      .then(blob => {
+        const url = window.URL.createObjectURL(new Blob([blob], {
+          type: 'application/pdf'
+        }))
+        const link = document.createElement('a')
+        link.href = url
+        link.download = "KaungMinKhant_CV.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        throw new Error("Error fetching the file:" + error);
+      });
+  }
+
+  // modal code
+  const [isModalOpened, setIsModalOpened] = useState(false);
+  useEffect(() => {
+    Modal.setAppElement('#qr-modal')
+  }, [])
+  function openModal() {
+    setIsModalOpened(true);
+  }
+  function closeModal() {
+    setIsModalOpened(false);
+  }
+
+  // generate QR
+  const [qrcode, setQrcode] = useState("");
+  useEffect(() => {
+    QRCode.toDataURL(import.meta.env.VITE_CV_LINK)
+    .then(url => {
+      // console.log(url)
+      setQrcode(url)
+    })
+  }, [])
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      // marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
   return (
     <Introduction>
+      <div id="qr-modal"></div>
+      <Modal
+        isOpen={isModalOpened}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <QRContainer>
+          <QRImage src={qrcode} />
+        </QRContainer>
+      </Modal>
       <InfoWrapper>
         <Title>
-          Hi, My name is <br /> Kaung Min Khant
+          {introductionContent.title()}
         </Title>
         <Description>
-          This is a Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam aliquid quod soluta adipisci natus eos maxime quia quidem veniam corrupti eveniet tempora, voluptas laudantium nihil asperiores, dolores possimus et unde!
+          {introductionContent.description()}
         </Description>
-        <CVButton>Download Resume</CVButton>
+        <ButtonGroup>
+          <CVButton onClick={downloadCV}>Download Resume</CVButton>
+          <CVButton onClick={openModal}>QR</CVButton>
+        </ButtonGroup>
       </InfoWrapper>
       <CVPhotoContainer>
-        <CVPhoto src="./images/cv.jpg"/>
+        <CVPhoto src="./images/cv.jpg" />
       </CVPhotoContainer>
     </Introduction>
   )

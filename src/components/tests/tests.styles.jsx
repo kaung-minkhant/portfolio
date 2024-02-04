@@ -1,5 +1,5 @@
 import {styled} from 'styled-components'
 
-export const Landing = styled.div`
+export const Tests = styled.div`
   flex: 1;
 `

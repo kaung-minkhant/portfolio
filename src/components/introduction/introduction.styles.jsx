@@ -117,3 +117,16 @@ export const CVPhoto = styled.img`
     flex: 0.85;
   }
 `
+
+export const QRContainer = styled.div`
+  
+`
+export const QRImage = styled.img`
+  width: 20vw;
+  @media (max-width: ${screenBreakpoints.desktopM}) {
+    width: 40vw;
+  }
+  @media (max-width: ${screenBreakpoints.mobile}) {
+    width: 80vw;
+  }
+`
