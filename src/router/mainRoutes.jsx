@@ -32,8 +32,13 @@ export const mainRoutes = {
       element: <TestsComponent />
     },
     {
+      path: '/valentine',
+      element: <CommingSoonComponent />
+    },
+    {
       path: "*",
       element: <NotFoundComponent />
-    }
+    },
+    
   ]
 }

@@ -1,4 +1,4 @@
-import { CVButton, CVPhoto, CVPhotoContainer, Description, InfoWrapper, Introduction, QRContainer, QRImage, Title } from "./introduction.styles"
+import { CVButton, CVPhotoContainer, Description, InfoWrapper, Introduction, QRContainer, QRImage, Title } from "./introduction.styles"
 import { ButtonGroup } from "../../styles"
 import Modal from 'react-modal'
 import { useEffect, useState } from "react"
@@ -84,9 +84,7 @@ export const IntroductionComponent = () => {
           <CVButton onClick={openModal}>QR</CVButton>
         </ButtonGroup>
       </InfoWrapper>
-      <CVPhotoContainer>
-        <CVPhoto src="./images/cv.jpg" />
-      </CVPhotoContainer>
+      <CVPhotoContainer />
     </Introduction>
   )
 }

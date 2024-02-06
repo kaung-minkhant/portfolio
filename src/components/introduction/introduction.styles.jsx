@@ -65,12 +65,13 @@ export const Description = styled.span`
   font-size: 16px;
   font-weight: normal;
   margin-bottom: 30px;
+  text-align: justify;
   @media (max-width: ${screenBreakpoints.desktopM}) {
     font-size: 14px;
   }
 
   @media (max-width: ${screenBreakpoints.tablet}) {
-    text-align: justify;
+    
     line-height: 20px;
     margin-bottom: 15px;
   }
@@ -94,29 +95,46 @@ export const CVButton = styled.button`
 `
 
 export const CVPhotoContainer = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  @media (max-width: ${screenBreakpoints.tablet}) {
-    width: 50%;
-    margin-bottom: 12px;
-  }
-`
-
-export const CVPhoto = styled.img`
-  flex: 0.7;
+  margin-left: auto;
+  background: url("./images/cv.jpg") 50% 30% no-repeat;
+  background-size: 250px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
-  object-fit: contain;
-  box-shadow: -5px 10px #EDF7FA;
-
-  @media (max-width: ${screenBreakpoints.desktopL}) {
-    flex: 0.85;
+  @media (max-width: ${screenBreakpoints.desktopS}) {
+    width: 200px;
+    height: 200px;
+    background-size: 200px;
   }
-  @media (max-width: ${screenBreakpoints.desktopM}) {
-    flex: 0.85;
+  @media (max-width: ${screenBreakpoints.tablet}) {
+    margin-bottom: 12px;
+    margin-left: 0px;
+    width: 170px;
+    height: 170px;
+    background-size: 170px;
+  }
+  @media (max-width: ${screenBreakpoints.mobile}) {
+    width: 170px;
+    height: 170px;
+    background-size: 170px;
   }
 `
+
+// export const CVPhoto = styled.img`
+//   flex: 0.7;
+//   border-radius: 50%;
+//   /* object-fit: contain; */
+//   box-shadow: -5px 10px #EDF7FA;
+//   width: 100%;
+  
+
+//   @media (max-width: ${screenBreakpoints.desktopL}) {
+//     flex: 0.85;
+//   }
+//   @media (max-width: ${screenBreakpoints.desktopM}) {
+//     flex: 0.85;
+//   }
+// `
 
 export const QRContainer = styled.div`
   
