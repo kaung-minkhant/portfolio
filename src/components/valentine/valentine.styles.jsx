@@ -30,22 +30,6 @@ export const Yes = styled.button`
   font-size: x-large;
   font-weight: 600;
   cursor: pointer;
-  &:hover {
-    animation-name: bigger;
-    animation-duration: 1s;
-  }
-  
-  @keyframes bigger {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.2);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
 `
 export const No = styled.button`
   background-color: red;
@@ -57,19 +41,9 @@ export const No = styled.button`
   font-size: medium;
   font-weight: 500;
   cursor: pointer;
-  &:hover {
-    animation-name: smaller;
-    animation-duration: 1s;
-  }
-  @keyframes smaller {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(0.8);
-    }
-    100% {
-      transform: scale(1);
-    }
+
+  &:disabled {
+    filter: brightness(50%);
+    cursor: default;
   }
 `

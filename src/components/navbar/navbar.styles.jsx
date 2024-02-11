@@ -5,7 +5,7 @@ import { backgroundColors } from '../../settings/colors'
 export const Nav = styled.nav`
   display: flex;
   justify-content: flex-end;
-  padding: 27px 60px 20px 60px;
+  padding: 20px 60px 20px 60px;
   border-bottom: 1px solid #999999;
   background-color: ${backgroundColors.nav};
   /* position: relative; */
@@ -24,11 +24,11 @@ export const NavItems = styled.div`
   overflow: hidden;
   transition: max-height 0.5s, padding 0.5s;
   background-color: ${backgroundColors.navItems};
-  z-index: 10;
+  z-index: 100;
 
   @media (max-width: ${screenBreakpoints.mobile}) {
     gap: 15px;
-    top: 64.5px;
+    top: 65px;
     width: 100%;
     padding: ${props => props.$isNavOpened ? "15px 0" : 0};
     /* outline: 1px solid black; */
