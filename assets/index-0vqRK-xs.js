@@ -6462,6 +6462,7 @@ const screenBreakpoints = {
 const StickyTop = ut.div`
   position: sticky;
   top: 0;
+  z-index: 10;
 `;
 const ButtonGroup = ut.div`
   display: flex;
@@ -25493,7 +25494,7 @@ const Nav = ut.nav`
   padding: 20px 60px 20px 60px;
   border-bottom: 1px solid #999999;
   background-color: ${backgroundColors.nav};
-  /* position: relative; */
+  position: relative;
   z-index: 10;
 
   @media (max-width: ${screenBreakpoints.mobile}) {
@@ -25508,6 +25509,7 @@ const NavItems = ut.div`
   overflow: hidden;
   transition: max-height 0.5s, padding 0.5s;
   background-color: ${backgroundColors.navItems};
+    position: absolute;
   z-index: 100;
 
   @media (max-width: ${screenBreakpoints.mobile}) {
@@ -25516,7 +25518,6 @@ const NavItems = ut.div`
     width: 100%;
     padding: ${(props) => props.$isNavOpened ? "15px 0" : 0};
     /* outline: 1px solid black; */
-    position: absolute;
     flex-direction: column;
     border-bottom: 1px solid #999999;
     max-height: ${(props) => props.$isNavOpened ? "200px" : 0};
@@ -32337,6 +32338,8 @@ const RecentPostsComponent = () => {
 
 const Landing = ut.div`
   flex: 1;
+  position: relative;
+  z-index: 1;
 `;
 
 const LandingView = () => {
