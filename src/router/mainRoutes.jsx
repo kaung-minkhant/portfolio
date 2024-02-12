@@ -6,6 +6,7 @@ import { ValentineComponent } from "../components/valentine/valentine.comp";
 import { MainLayout } from "../layouts/main/main.layout";
 import { LandingView } from "../views/landing/landing.view";
 import  EditorView  from 'portfolioBlog/blogEditorView'
+// import Sample from 'portfolioBlog/sample'
 
 export const mainRoutes = {
   path: "/",

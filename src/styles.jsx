@@ -5,6 +5,7 @@ import { screenBreakpoints } from './settings/breakpoints'
 export const StickyTop = styled.div`
   position: sticky;
   top: 0;
+  z-index: 10;
 `
 
 export const ButtonGroup = styled.div`

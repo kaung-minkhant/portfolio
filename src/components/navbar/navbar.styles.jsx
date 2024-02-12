@@ -8,7 +8,7 @@ export const Nav = styled.nav`
   padding: 20px 60px 20px 60px;
   border-bottom: 1px solid #999999;
   background-color: ${backgroundColors.nav};
-  /* position: relative; */
+  position: relative;
   z-index: 10;
 
   @media (max-width: ${screenBreakpoints.mobile}) {
@@ -24,6 +24,7 @@ export const NavItems = styled.div`
   overflow: hidden;
   transition: max-height 0.5s, padding 0.5s;
   background-color: ${backgroundColors.navItems};
+    position: absolute;
   z-index: 100;
 
   @media (max-width: ${screenBreakpoints.mobile}) {
@@ -32,7 +33,6 @@ export const NavItems = styled.div`
     width: 100%;
     padding: ${props => props.$isNavOpened ? "15px 0" : 0};
     /* outline: 1px solid black; */
-    position: absolute;
     flex-direction: column;
     border-bottom: 1px solid #999999;
     max-height: ${props => props.$isNavOpened ? "200px" : 0};
