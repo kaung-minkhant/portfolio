@@ -1,5 +1,6 @@
-import { CVButton, CVPhotoContainer, Description, InfoWrapper, Introduction, QRContainer, QRImage, Title } from "./introduction.styles"
+import { CVButton, CVPhotoContainer, Description, InfoWrapper, Introduction, QRContainer, QRImage, Title } from "./introduction.styles.jsx"
 import { ButtonGroup } from "../../styles"
+import './introduction.styles.css'
 import Modal from 'react-modal'
 import { useEffect, useState } from "react"
 import QRCode from 'qrcode'
@@ -28,16 +29,16 @@ export const IntroductionComponent = () => {
   }
 
   // modal code
-  const [isModalOpened, setIsModalOpened] = useState(false);
-  useEffect(() => {
-    Modal.setAppElement('#qr-modal')
-  }, [])
-  function openModal() {
-    setIsModalOpened(true);
-  }
-  function closeModal() {
-    setIsModalOpened(false);
-  }
+  // const [isModalOpened, setIsModalOpened] = useState(false);
+  // useEffect(() => {
+  //   Modal.setAppElement('#qr-modal')
+  // }, [])
+  // function openModal() {
+  //   setIsModalOpened(true);
+  // }
+  // function closeModal() {
+  //   setIsModalOpened(false);
+  // }
 
   // generate QR
   const [qrcode, setQrcode] = useState("");
@@ -61,7 +62,7 @@ export const IntroductionComponent = () => {
   };
   return (
     <Introduction>
-      <div id="qr-modal"></div>
+      {/* <div id="qr-modal"></div>
       <Modal
         isOpen={isModalOpened}
         onRequestClose={closeModal}
@@ -71,7 +72,7 @@ export const IntroductionComponent = () => {
         <QRContainer>
           <QRImage src={qrcode} />
         </QRContainer>
-      </Modal>
+      </Modal> */}
       <InfoWrapper>
         <Title>
           {introductionContent.title()}
@@ -81,7 +82,7 @@ export const IntroductionComponent = () => {
         </Description>
         <ButtonGroup>
           <CVButton onClick={downloadCV}>Download Resume</CVButton>
-          <CVButton onClick={openModal}>QR</CVButton>
+          {/* <CVButton onClick={openModal}>QR</CVButton> */}
         </ButtonGroup>
       </InfoWrapper>
       <CVPhotoContainer />
