@@ -1,5 +1,5 @@
-import {styled} from 'styled-components'
-import {screenBreakpoints} from '../../settings/breakpoints'
+import { styled } from 'styled-components'
+import { screenBreakpoints } from '../../settings/breakpoints'
 import { backgroundColors } from '../../settings/colors'
 
 export const Nav = styled.nav`
@@ -24,10 +24,10 @@ export const NavItems = styled.div`
   overflow: hidden;
   transition: max-height 0.5s, padding 0.5s;
   background-color: ${backgroundColors.navItems};
-    position: absolute;
   z-index: 100;
 
   @media (max-width: ${screenBreakpoints.mobile}) {
+    position: absolute;
     gap: 15px;
     top: 65px;
     width: 100%;
