@@ -27671,10 +27671,10 @@ const CVPhotoContainer = ut.div`
     background-size: 170px;
   }
 `;
-const QRContainer = ut.div`
+ut.div`
   
 `;
-const QRImage = ut.img`
+ut.img`
   width: 20vw;
   @media (max-width: ${screenBreakpoints.desktopM}) {
     width: 40vw;
@@ -27686,7 +27686,7 @@ const QRImage = ut.img`
 
 var lib = {exports: {}};
 
-var Modal$2 = {};
+var Modal$1 = {};
 
 var propTypes = {exports: {}};
 
@@ -28978,10 +28978,10 @@ const reactLifecyclesCompat_es = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.
 
 const require$$6 = /*@__PURE__*/getAugmentedNamespace(reactLifecyclesCompat_es);
 
-Object.defineProperty(Modal$2, "__esModule", {
+Object.defineProperty(Modal$1, "__esModule", {
   value: true
 });
-Modal$2.bodyOpenClassName = Modal$2.portalClassName = void 0;
+Modal$1.bodyOpenClassName = Modal$1.portalClassName = void 0;
 var _extends = Object.assign || function(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i];
@@ -29062,8 +29062,8 @@ function _inherits(subClass, superClass) {
   if (superClass)
     Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
-var portalClassName = Modal$2.portalClassName = "ReactModalPortal";
-var bodyOpenClassName = Modal$2.bodyOpenClassName = "ReactModal__Body--open";
+var portalClassName = Modal$1.portalClassName = "ReactModalPortal";
+var bodyOpenClassName = Modal$1.bodyOpenClassName = "ReactModal__Body--open";
 var isReact16 = _safeHTMLElement.canUseDOM && _reactDom2.default.createPortal !== void 0;
 var createHTMLElement = function createHTMLElement2(name) {
   return document.createElement(name);
@@ -29074,7 +29074,7 @@ var getCreatePortal = function getCreatePortal2() {
 function getParentElement(parentSelector2) {
   return parentSelector2();
 }
-var Modal$1 = function(_Component) {
+var Modal = function(_Component) {
   _inherits(Modal2, _Component);
   function Modal2() {
     var _ref;
@@ -29179,7 +29179,7 @@ var Modal$1 = function(_Component) {
   }]);
   return Modal2;
 }(_react.Component);
-Modal$1.propTypes = {
+Modal.propTypes = {
   isOpen: _propTypes2.default.bool.isRequired,
   style: _propTypes2.default.shape({
     content: _propTypes2.default.object,
@@ -29219,7 +29219,7 @@ Modal$1.propTypes = {
   overlayElement: _propTypes2.default.func,
   contentElement: _propTypes2.default.func
 };
-Modal$1.defaultProps = {
+Modal.defaultProps = {
   isOpen: false,
   portalClassName,
   bodyOpenClassName,
@@ -29249,7 +29249,7 @@ Modal$1.defaultProps = {
     );
   }
 };
-Modal$1.defaultStyles = {
+Modal.defaultStyles = {
   overlay: {
     position: "fixed",
     top: 0,
@@ -29273,8 +29273,8 @@ Modal$1.defaultStyles = {
     padding: "20px"
   }
 };
-(0, _reactLifecyclesCompat.polyfill)(Modal$1);
-Modal$2.default = Modal$1;
+(0, _reactLifecyclesCompat.polyfill)(Modal);
+Modal$1.default = Modal;
 
 (function (module, exports) {
 
@@ -29282,7 +29282,7 @@ Modal$2.default = Modal$1;
 	  value: true
 	});
 
-	var _Modal = Modal$2;
+	var _Modal = Modal$1;
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
@@ -29291,9 +29291,6 @@ Modal$2.default = Modal$1;
 	exports.default = _Modal2.default;
 	module.exports = exports["default"]; 
 } (lib, lib.exports));
-
-var libExports = lib.exports;
-const Modal = /*@__PURE__*/getDefaultExportFromCjs(libExports);
 
 var browser = {};
 
@@ -32243,51 +32240,17 @@ const IntroductionComponent = () => {
       throw new Error("Error fetching the file:" + error);
     });
   };
-  const [isModalOpened, setIsModalOpened] = useState(false);
-  useEffect(() => {
-    Modal.setAppElement("#qr-modal");
-  }, []);
-  function openModal() {
-    setIsModalOpened(true);
-  }
-  function closeModal() {
-    setIsModalOpened(false);
-  }
   const [qrcode, setQrcode] = useState("");
   useEffect(() => {
     browser.toDataURL("https://public-files-store-bucket.s3.ap-southeast-1.amazonaws.com/cv.pdf").then((url) => {
       setQrcode(url);
     });
   }, []);
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      // marginRight: '-50%',
-      transform: "translate(-50%, -50%)"
-    }
-  };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Introduction, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "qr-modal" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Modal,
-      {
-        isOpen: isModalOpened,
-        onRequestClose: closeModal,
-        style: customStyles,
-        contentLabel: "Example Modal",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx(QRContainer, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(QRImage, { src: qrcode }) })
-      }
-    ),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(InfoWrapper, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Title$1, { children: introductionContent.title() }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Description, { children: introductionContent.description() }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(ButtonGroup, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CVButton, { onClick: downloadCV, children: "Download Resume" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CVButton, { onClick: openModal, children: "QR" })
-      ] })
+      /* @__PURE__ */ jsxRuntimeExports.jsx(ButtonGroup, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CVButton, { onClick: downloadCV, children: "Download Resume" }) })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(CVPhotoContainer, {})
   ] });

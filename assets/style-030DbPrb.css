@@ -1,4 +1,6 @@
-:root {
+.ReactModal__Content {
+  z-index: 100;
+}:root {
   font-family: "Heebo", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
