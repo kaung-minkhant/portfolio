@@ -17,7 +17,7 @@ export default defineConfig({
       name: 'portfolio',
       filename: 'remoteEntry.js',
       remotes: {
-        portfolioBlog: "https://kaung-minkhant.github.io/portfolio-blog/assets/remoteEntry.js"
+        portfolioBlog: "http://d3setivpv8usp4.cloudfront.net/assets/remoteEntry.js"
         // portfolioBlog: "http://localhost:4001/assets/remoteEntry.js"
       },
       // Modules to expose
