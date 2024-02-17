@@ -5,7 +5,7 @@ import { TestsComponent } from "../components/tests/tests.comp";
 import { ValentineComponent } from "../components/valentine/valentine.comp";
 import { MainLayout } from "../layouts/main/main.layout";
 import { LandingView } from "../views/landing/landing.view";
-import  EditorView  from 'portfolioBlog/blogEditorView'
+// import  EditorView  from 'portfolioBlog/blogEditorView'
 // import Sample from 'portfolioBlog/sample'
 
 export const mainRoutes = {
@@ -33,10 +33,10 @@ export const mainRoutes = {
       path: "tests",
       element: <TestsComponent />
     },
-    {
-      path: 'edit',
-      element: <EditorView />
-    },
+    // {
+    //   path: 'edit',
+    //   element: <EditorView />
+    // },
     {
       path: '/valentine',
       element: <ValentineComponent />
