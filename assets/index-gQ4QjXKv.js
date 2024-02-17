@@ -422,7 +422,7 @@ function satisfy(version, range) {
 }
 
 // eslint-disable-next-line no-undef
-const moduleMap = {'react':{get:()=>()=>__federation_import$1(new URL('__federation_shared_react-JNWbGlzI.js', import.meta.url).href),import:true},'react-dom':{get:()=>()=>__federation_import$1(new URL('__federation_shared_react-dom-JGCU3ekn.js', import.meta.url).href),import:true}};
+const moduleMap = {'react':{get:()=>()=>__federation_import(new URL('__federation_shared_react-JNWbGlzI.js', import.meta.url).href),import:true},'react-dom':{get:()=>()=>__federation_import(new URL('__federation_shared_react-dom-JGCU3ekn.js', import.meta.url).href),import:true}};
 const moduleCache = Object.create(null);
 async function importShared(name, shareScope = 'default') {
   return moduleCache[name]
@@ -430,7 +430,7 @@ async function importShared(name, shareScope = 'default') {
     : (await getSharedFromRuntime(name, shareScope)) || getSharedFromLocal(name)
 }
 // eslint-disable-next-line
-async function __federation_import$1(name) {
+async function __federation_import(name) {
   return __vitePreload(() => import(name),true?__vite__mapDeps([]):void 0,import.meta.url)
 }
 async function getSharedFromRuntime(name, shareScope) {
@@ -4957,94 +4957,6 @@ var DataRouterStateHook;
   DataRouterStateHook2["UseFetchers"] = "useFetchers";
   DataRouterStateHook2["UseScrollRestoration"] = "useScrollRestoration";
 })(DataRouterStateHook || (DataRouterStateHook = {}));
-
-const remotesMap = {
-'portfolioBlog':{url:'https://kaung-minkhant.github.io/portfolio-blog/assets/remoteEntry.js',format:'esm',from:'vite'}
-};
-                const loadJS = async (url, fn) => {
-                    const resolvedUrl = typeof url === 'function' ? await url() : url;
-                    const script = document.createElement('script');
-                    script.type = 'text/javascript';
-                    script.onload = fn;
-                    script.src = resolvedUrl;
-                    document.getElementsByTagName('head')[0].appendChild(script);
-                };
-
-                function get(name, remoteFrom) {
-                    return __federation_import(name).then(module => () => {
-                        if (remoteFrom === 'webpack') {
-                            return Object.prototype.toString.call(module).indexOf('Module') > -1 && module.default ? module.default : module
-                        }
-                        return module
-                    })
-                }
-                
-                function merge$1(obj1, obj2) {
-                  const mergedObj = Object.assign(obj1, obj2);
-                  for (const key of Object.keys(mergedObj)) {
-                    if (typeof mergedObj[key] === 'object' && typeof obj2[key] === 'object') {
-                      mergedObj[key] = merge$1(mergedObj[key], obj2[key]);
-                    }
-                  }
-                  return mergedObj;
-                }
-
-                const wrapShareModule = remoteFrom => {
-                  return merge$1({
-                    'react':{'18.2.0':{get:()=>get(new URL('__federation_shared_react-JNWbGlzI.js', import.meta.url).href, remoteFrom), loaded:1}},'react-dom':{'18.2.0':{get:()=>get(new URL('__federation_shared_react-dom-JGCU3ekn.js', import.meta.url).href, remoteFrom), loaded:1}}
-                  }, (globalThis.__federation_shared__ || {})['default'] || {});
-                };
-
-                async function __federation_import(name) {
-                    return __vitePreload(() => import(name),true?__vite__mapDeps([]):void 0,import.meta.url);
-                }
-
-                async function __federation_method_ensure(remoteId) {
-                    const remote = remotesMap[remoteId];
-                    if (!remote.inited) {
-                        if ('var' === remote.format) {
-                            // loading js with script tag
-                            return new Promise(resolve => {
-                                const callback = () => {
-                                    if (!remote.inited) {
-                                        remote.lib = window[remoteId];
-                                        remote.lib.init(wrapShareModule(remote.from));
-                                        remote.inited = true;
-                                    }
-                                    resolve(remote.lib);
-                                };
-                                return loadJS(remote.url, callback);
-                            });
-                        } else if (['esm', 'systemjs'].includes(remote.format)) {
-                            // loading js with import(...)
-                            return new Promise((resolve, reject) => {
-                                const getUrl = typeof remote.url === 'function' ? remote.url : () => Promise.resolve(remote.url);
-                                getUrl().then(url => {
-                                    __vitePreload(() => import(/* @vite-ignore */ url),true?__vite__mapDeps([]):void 0,import.meta.url).then(lib => {
-                                        if (!remote.inited) {
-                                            const shareScope = wrapShareModule(remote.from);
-                                            lib.init(shareScope);
-                                            remote.lib = lib;
-                                            remote.lib.init(shareScope);
-                                            remote.inited = true;
-                                        }
-                                        resolve(remote.lib);
-                                    }).catch(reject);
-                                });
-                            })
-                        }
-                    } else {
-                        return remote.lib;
-                    }
-                }
-
-                function __federation_method_unwrapDefault(module) {
-                    return (module?.__esModule || module?.[Symbol.toStringTag] === 'Module') ? module.default : module
-                }
-
-                function __federation_method_getRemote(remoteName, componentName) {
-                    return __federation_method_ensure(remoteName).then((remote) => remote.get(componentName).then(factory => factory()));
-                }
 
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -27671,10 +27583,10 @@ const CVPhotoContainer = ut.div`
     background-size: 170px;
   }
 `;
-ut.div`
+const QRContainer = ut.div`
   
 `;
-ut.img`
+const QRImage = ut.img`
   width: 20vw;
   @media (max-width: ${screenBreakpoints.desktopM}) {
     width: 40vw;
@@ -27686,7 +27598,7 @@ ut.img`
 
 var lib = {exports: {}};
 
-var Modal$1 = {};
+var Modal$2 = {};
 
 var propTypes = {exports: {}};
 
@@ -28978,10 +28890,10 @@ const reactLifecyclesCompat_es = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.
 
 const require$$6 = /*@__PURE__*/getAugmentedNamespace(reactLifecyclesCompat_es);
 
-Object.defineProperty(Modal$1, "__esModule", {
+Object.defineProperty(Modal$2, "__esModule", {
   value: true
 });
-Modal$1.bodyOpenClassName = Modal$1.portalClassName = void 0;
+Modal$2.bodyOpenClassName = Modal$2.portalClassName = void 0;
 var _extends = Object.assign || function(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i];
@@ -29062,8 +28974,8 @@ function _inherits(subClass, superClass) {
   if (superClass)
     Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
-var portalClassName = Modal$1.portalClassName = "ReactModalPortal";
-var bodyOpenClassName = Modal$1.bodyOpenClassName = "ReactModal__Body--open";
+var portalClassName = Modal$2.portalClassName = "ReactModalPortal";
+var bodyOpenClassName = Modal$2.bodyOpenClassName = "ReactModal__Body--open";
 var isReact16 = _safeHTMLElement.canUseDOM && _reactDom2.default.createPortal !== void 0;
 var createHTMLElement = function createHTMLElement2(name) {
   return document.createElement(name);
@@ -29074,7 +28986,7 @@ var getCreatePortal = function getCreatePortal2() {
 function getParentElement(parentSelector2) {
   return parentSelector2();
 }
-var Modal = function(_Component) {
+var Modal$1 = function(_Component) {
   _inherits(Modal2, _Component);
   function Modal2() {
     var _ref;
@@ -29179,7 +29091,7 @@ var Modal = function(_Component) {
   }]);
   return Modal2;
 }(_react.Component);
-Modal.propTypes = {
+Modal$1.propTypes = {
   isOpen: _propTypes2.default.bool.isRequired,
   style: _propTypes2.default.shape({
     content: _propTypes2.default.object,
@@ -29219,7 +29131,7 @@ Modal.propTypes = {
   overlayElement: _propTypes2.default.func,
   contentElement: _propTypes2.default.func
 };
-Modal.defaultProps = {
+Modal$1.defaultProps = {
   isOpen: false,
   portalClassName,
   bodyOpenClassName,
@@ -29249,7 +29161,7 @@ Modal.defaultProps = {
     );
   }
 };
-Modal.defaultStyles = {
+Modal$1.defaultStyles = {
   overlay: {
     position: "fixed",
     top: 0,
@@ -29273,8 +29185,8 @@ Modal.defaultStyles = {
     padding: "20px"
   }
 };
-(0, _reactLifecyclesCompat.polyfill)(Modal);
-Modal$1.default = Modal;
+(0, _reactLifecyclesCompat.polyfill)(Modal$1);
+Modal$2.default = Modal$1;
 
 (function (module, exports) {
 
@@ -29282,7 +29194,7 @@ Modal$1.default = Modal;
 	  value: true
 	});
 
-	var _Modal = Modal$1;
+	var _Modal = Modal$2;
 
 	var _Modal2 = _interopRequireDefault(_Modal);
 
@@ -29291,6 +29203,9 @@ Modal$1.default = Modal;
 	exports.default = _Modal2.default;
 	module.exports = exports["default"]; 
 } (lib, lib.exports));
+
+var libExports = lib.exports;
+const Modal = /*@__PURE__*/getDefaultExportFromCjs(libExports);
 
 var browser = {};
 
@@ -32240,17 +32155,52 @@ const IntroductionComponent = () => {
       throw new Error("Error fetching the file:" + error);
     });
   };
+  const [isModalOpened, setIsModalOpened] = useState(false);
+  useEffect(() => {
+    Modal.setAppElement("#qr-modal");
+  }, []);
+  function openModal() {
+    setIsModalOpened(true);
+  }
+  function closeModal() {
+    setIsModalOpened(false);
+  }
   const [qrcode, setQrcode] = useState("");
   useEffect(() => {
     browser.toDataURL("https://public-files-store-bucket.s3.ap-southeast-1.amazonaws.com/cv.pdf").then((url) => {
       setQrcode(url);
     });
   }, []);
+  const customStyles = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      // marginRight: '-50%',
+      transform: "translate(-50%, -50%)"
+    }
+  };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Introduction, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "qr-modal" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Modal,
+      {
+        isOpen: isModalOpened,
+        onRequestClose: closeModal,
+        style: customStyles,
+        contentLabel: "Example Modal",
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(QRContainer, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(QRImage, { src: qrcode }) })
+      }
+    ),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(InfoWrapper, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Title$1, { children: introductionContent.title() }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Description, { children: introductionContent.description() }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(ButtonGroup, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CVButton, { onClick: downloadCV, children: "Download Resume" }) })
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(ButtonGroup, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CVButton, { onClick: downloadCV, children: "Download Resume" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CVButton, { onClick: openModal, children: "QR" })
+      ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(CVPhotoContainer, {})
   ] });
@@ -32313,8 +32263,6 @@ const LandingView = () => {
   ] });
 };
 
-const __federation_var_portfolioBlogblogEditorView = await __federation_method_getRemote("portfolioBlog" , "./blogEditorView");
- let EditorView = __federation_method_unwrapDefault(__federation_var_portfolioBlogblogEditorView); 
 const mainRoutes = {
   path: "/",
   element: /* @__PURE__ */ jsxRuntimeExports.jsx(MainLayout, {}),
@@ -32340,10 +32288,10 @@ const mainRoutes = {
       path: "tests",
       element: /* @__PURE__ */ jsxRuntimeExports.jsx(TestsComponent, {})
     },
-    {
-      path: "edit",
-      element: /* @__PURE__ */ jsxRuntimeExports.jsx(EditorView, {})
-    },
+    // {
+    //   path: 'edit',
+    //   element: <EditorView />
+    // },
     {
       path: "/valentine",
       element: /* @__PURE__ */ jsxRuntimeExports.jsx(ValentineComponent, {})
