@@ -32130,11 +32130,11 @@ browser.toString = renderCanvas.bind(null, function (data, _, opts) {
 
 const introductionContent = {
   title: () => /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    "Hi, My name is ",
+    "Hi, This is me.. ",
     /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
     " Kaung Min Khant"
   ] }),
-  description: () => /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "Enthusiastic developer or engineer who works with both the frontend and backend of a website or application. With experience in react framework, provide an end-to-end service, and can be involved in projects that involve databases and building user facing websites and applications. Willing to learn new things required for the job, and adapt to the team." })
+  description: () => /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "An enthusiastic developer or engineer who works with both the frontend and backend of a website or application. With experience in react framework, provide an end-to-end service, and can be involved in projects that involve databases and building user facing websites and applications. Willing to learn new things required for the job, and adapt to the team." })
 };
 
 const {useEffect,useState} = await importShared('react');
@@ -32173,13 +32173,15 @@ const IntroductionComponent = () => {
   }, []);
   const customStyles = {
     content: {
-      position: "absolute",
       top: "50%",
       left: "50%",
       right: "auto",
       bottom: "auto",
       // marginRight: '-50%',
       transform: "translate(-50%, -50%)"
+    },
+    overlay: {
+      zIndex: 50
     }
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(Introduction, { children: [
