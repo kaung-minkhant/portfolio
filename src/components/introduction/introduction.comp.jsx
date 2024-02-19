@@ -52,8 +52,6 @@ export const IntroductionComponent = () => {
 
   const customStyles = {
     content: {
-      position: 'absolute',      
-
       top: '50%',
       left: '50%',
       right: 'auto',
@@ -61,6 +59,9 @@ export const IntroductionComponent = () => {
       // marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
     },
+    overlay: {
+      zIndex: 50,
+    }
   };
   return (
     <Introduction>

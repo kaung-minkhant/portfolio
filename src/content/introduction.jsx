@@ -1,12 +1,12 @@
 export const introductionContent = {
   title: () => (
     <>
-      Hi, My name is <br /> Kaung Min Khant
+      Hi, This is me.. <br /> Kaung Min Khant
     </>
   ),
   description: () => (
     <>
-      Enthusiastic developer or engineer who works with both the frontend and
+      An enthusiastic developer or engineer who works with both the frontend and
  backend of a website or application.
  With experience in react framework,
  provide an end-to-end service, and
